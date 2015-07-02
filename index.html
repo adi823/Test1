@@ -7,43 +7,52 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-	   <div class = "container">
-         <h1 ><b>To do App</b>!</h1>
-       </div>
-       <div class="container">
-       
-        <div class="row">
-            <div class="col-md-offset-5 col-md-5">
-            	<input type="text" class="newTask" placeholder="What need to be done?">
-              <button type="button" class="btnCreate btn btn-primary glyphicon glyphicon-plus" title="Click to add task"></button>
-            </div>
-            
-       </div>
 
-        <div class="row">
-        	<div class="col-md-offset-5 col-md-5">
-        		<div class="alert alert-warning hidden title-missing-alert" role="alert">Enter a task title</div>
-        	</div>
-        </div>
+  <!-- Task List App -->
+  <div class = "container">
+    <h1><b>To do App</b>!</h1>
+    <br>
 
-        <!-- The List Container -->
-        <div class = "row">
-          <div class = "list col col-md-offset-4 col-md-4"></div>
+    <!-- New Task -->
+    <div class="row">
+      <div class="col col-md-offset-4 col-md-4">
+        <div class="input-group">
+          <input type="text" class="newTask form-control" placeholder="What need to be done?">
+          <div class="input-group-btn btnCreate" title="Click to add task">
+            <div class="btn btn-primary glyphicon glyphicon-plus"></div>
+          </div>
         </div>
       </div>
+    </div><!-- /New Task -->
 
-      <!-- Invisible template -->
-      <div class = "template">
-        <div class = "task input-group">
-          <span class = "btnStatusTask input-group-addon">
-            <span class = "glyphicon glyphicon-tasks"></span>
-          </span>
-          <span class = "taskLabel form-control"></span>
-          <span class = "btnDeleteTask input-group-addon">
-            <span class = "glyphicon glyphicon-minus"></span>
-          </span>
-        </div>
-      </div>
+    <!-- New Task validation warning -->
+    <div class="row">
+      	<div class="col-md-offset-4 col-md-4">
+      		<div class="alert alert-warning hidden title-missing-alert" role="alert">Enter a task title</div>
+      	</div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <!-- The List Container -->
+    <div class = "row">
+      <div class = "list col col-md-offset-4 col-md-4"></div>
+    </div>
+  </div>
+
+  <!-- Invisible template -->
+  <div class = "template">
+    <div class = "task input-group">
+      <span class = "btnStatusTask input-group-addon">
+        <span class = "glyphicon glyphicon-tasks"></span>
+      </span>
+      <span class = "taskLabel form-control"></span>
+      <span class = "btnDeleteTask input-group-addon">
+        <span class = "glyphicon glyphicon-minus"></span>
+      </span>
+    </div>
+  </div>
 
 
      
