@@ -1,1 +1,13 @@
-h1{color:blue; text-align: center;}
+h1 {
+	color:blue; 
+	text-align: center;
+}
+
+.template{visibility: hidden;}
+
+.hidden{visibility: hidden;}
+
+
+/** Repair top indentation of glyphicon buttons in input groups */
+.input-group-btn .btn.glyphicon { top: 0; }
+
