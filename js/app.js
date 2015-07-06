@@ -1,20 +1,49 @@
+
+var todos = todoData.list(); ///unstoreTodos();
+console.debug('Load todo list from localStorage %o', todos);
+
 $(document).ready(function(){
 
 	$(".btnCreate").click(createTask)
     
     $(".newTask").keypress(function(key){
-
     	if(key.which == 13) createTask();
     }).focus();
+
+    updateView();
 
 });
 
 // Clone the template task, insert data, append it to the task list
 var createTask = function(){
 	console.debug('createTask');
+
+    var taskLabelText = $('.newTask').val();
+
+    // Update data model
+    var todo = {
+        title: taskLabelText,
+        state: "TODO"
+    };
+    todos.push(todo);
+    console.debug('TODO array %o', todos);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    updateView();
+};
+
+/** Renders all todo elements with their state */
+var updateView = function() {
+    $(".list").empty();
+    for (var i=0; i<todos.length; i++) {
+        renderTask(todos[i]);
+    }
+};
+
+/** UI operation to add todo data objects to the view */
+var renderTask = function(todo) {
    
     var taskElement = $(".template .task").clone();
-    var taskLabelText = $(".newTask").val();
+    var taskLabelText = todo.title;
     if(taskLabelText == " "){
         console.warn("empty tasks are not created");
         $(".title-missing-alert").removeClass("hidden").fadeIn(0).fadeOut(6000);
@@ -23,15 +52,37 @@ var createTask = function(){
     taskElement.find(".taskLabel").text(taskLabelText);
     taskElement.find(".btnDeleteTask").click(deleteTask);
     taskElement.find(".btnStatusTask").click(toggleTaskStatus);
-    console.debug("create task %s, from element %o", taskLabelText, taskElement);
+    console.debug("insert task %s, from element %o", taskLabelText, taskElement);
     $(".list").append(taskElement);
-    $(".newTask").val(" ").focus();
+
 };
 
 // Delete an existing task from the task list
 var deleteTask = function(){
-    console.debug("delete entry %0", this);
-    $(this).parent().remove();
+    var index = $(this).parent().prevAll('.task').length;
+    console.debug("delete entry %d", index);
+    if (index < 0 || index >= todos.length) {
+        console.warn('index out of bounds');
+        return;
+    }
+    todos.splice(index, 1);
+    storeTodos(todos);
+
+    //$(this).parent().remove();
+    updateView();
+
+};
+
+var storeTodos = function(_todos) {
+    localStorage.setItem("todos", JSON.stringify(_todos));
+};
+
+function unstoreTodos() {
+    var _todos = [];
+    if (localStorage.getItem('todos')) {
+        _todos = JSON.parse(localStorage.getItem('todos'));
+    }
+    return _todos;
 };
 
 //Read the currenttask status, then toggle it (task title strikethrough, status icon and color)
