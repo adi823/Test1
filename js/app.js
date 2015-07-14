@@ -16,29 +16,20 @@ $(document).ready(function(){
 
 // Clone the template task, insert data, append it to the task list
 var createTask = function(){
+
 	console.debug('createTask');
-
     var taskLabelText = $('.newTask').val();
-
-    // Update data model
-    var todo = {
-        title: taskLabelText,
-        state: "TODO"
-    };
-    todos.push(todo);
-    console.debug('TODO array %o', todos);
-    localStorage.setItem("todos", JSON.stringify(todos));
-    updateView();
+    var todo = todoData.create(taskLabelText, "TODO");
+   
 };
 
 /** Renders all todo elements with their state */
-var updateView = function() {
-    $(".list").empty();
-    for (var i=0; i<todos.length; i++) {
-        renderTask(todos[i]);
-    }
-};
+    var updateView = function() {
 
+        todoData.update();
+   
+};
+ 
 /** UI operation to add todo data objects to the view */
 var renderTask = function(todo) {
    
@@ -59,18 +50,9 @@ var renderTask = function(todo) {
 
 // Delete an existing task from the task list
 var deleteTask = function(){
+
     var index = $(this).parent().prevAll('.task').length;
-    console.debug("delete entry %d", index);
-    if (index < 0 || index >= todos.length) {
-        console.warn('index out of bounds');
-        return;
-    }
-    todos.splice(index, 1);
-    storeTodos(todos);
-
-    //$(this).parent().remove();
-    updateView();
-
+    todoData.delete(index);
 };
 
 var storeTodos = function(_todos) {
