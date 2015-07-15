@@ -5,6 +5,11 @@
  * using localStorage as persistence
  */
 
+var storeTodos = function(_todos) {
+  localStorage.setItem("todos", JSON.stringify(_todos));
+}
+
+
 todoData = {
  	/** returns all todos */
  	list: function() {
@@ -17,48 +22,51 @@ todoData = {
  	},
  	/** creates todo */
  	create: function(title, state) {
-         var taskLabelText = $('.newTask').val();
-         // Update data model
-		 var todo = {
-		     title: taskLabelText,
-		     state: "TODO"
-		 };
-		     todos.push(todo);
-		     console.debug('TODO array %o', todos);
-		     localStorage.setItem("todos", JSON.stringify(todos));
-		     updateView();
-
+    if (!title) {
+      console.warn('Could not create todo. Title missing.');
+      return;
+    }
+    state = state || "TODO";
+    // Update data model
+		var todo = {
+       title: title,
+       state: state
+    };
+   todos.push(todo);
+   console.debug('TODO array %o', todos);
+   storeTodos(todos);
  	},
 
  	read: function(index) {
-
- 		
-
+    // TODO: out of bounds check
+    return todos[index];
  	},
+  /**
+   * Update a single todo
+   * Params:
+   * @index: the index of the todo
+   * @todo: the todo data object
+   */
  	update: function(index, todo) {
+    todos[index] = todo;
+    storeTodos(todos);
+  },
 
- 		 $(".list").empty();
-    	 for (var i=0; i<todos.length; i++) {
-    	 renderTask(todos[i]);
-		}
- 		   
-	},
- 
-	
+  toggle: function(index) {
+    todos[index].state = (todos[index].state == "TODO") ? "DONE" : "TODO";
+    storeTodos(todos);
+  },
+
+
  	delete: function(index) {
 
- 		var index = $(this).parent().prevAll('.task').length;
     	console.debug("delete entry %d", index);
     	if (index < 0 || index >= todos.length) {
         console.warn('index out of bounds');
         return;
     }
-   		todos.splice(index, 1);
-   		storeTodos(todos);
-
-    	//$(this).parent().remove();
-   		updateView();
+    todos.splice(index, 1);
+   	storeTodos(todos);
  	}
 
 };
-
