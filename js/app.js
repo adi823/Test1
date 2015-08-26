@@ -28,21 +28,33 @@ var updateView = function() {
 		for (var i=0; i<todos.length; i++) {
 		renderTask(todos[i]);
 	}
+	$('.debug').text(JSON.stringify(todos, null, 4));
 };
 
 /** UI operation to add todo data objects to the view */
 var renderTask = function(todo) {
 
-    var taskElement = $(".template .task").clone();
+    //var taskElement = $(".template .task").clone();
     var taskLabelText = todo.title;
     if(taskLabelText == " "){
         console.warn("empty tasks are not created");
         $(".title-missing-alert").removeClass("hidden").fadeIn(0).fadeOut(6000);
         return;
     }
-    taskElement.find(".taskLabel").text(taskLabelText);
-    taskElement.find(".btnDeleteTask").click(deleteTask);
+
+		var source = $('#todo-template').html();
+		var template = Handlebars.compile(source);
+		context = {
+			title: todo.title,
+			state: todo.state,
+			icon: (todo.state=='TODO') ? 'glyphicon-tasks' : 'glyphicon-ok'
+		};
+		var taskElement = $(template(context));
+		taskElement.find(".btnDeleteTask").click(deleteTask);
     taskElement.find(".btnStatusTask").click(toggleTaskStatus);
+
+		/*
+    taskElement.find(".taskLabel").text(taskLabelText);
 
 		if(todo.state != "TODO"){
         taskElement.find(".taskLabel").css("text-decoration", "line-through");
@@ -58,10 +70,10 @@ var renderTask = function(todo) {
                .css("color", "#555");
 
     }
+		*/
 
-
-    console.debug("insert task %s, from element %o", taskLabelText, taskElement);
-    $(".list").append(taskElement);
+    //console.debug("insert task %s, from element %o", taskLabelText, taskElement);
+    $(".list").append($(taskElement));
 
 };
 

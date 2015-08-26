@@ -1,5 +1,5 @@
 h1 {
-	color:blue; 
+	color:blue;
 	text-align: center;
 }
 
@@ -11,3 +11,11 @@ h1 {
 /** Repair top indentation of glyphicon buttons in input groups */
 .input-group-btn .btn.glyphicon { top: 0; }
 
+.task .btnStatusTask.DONE {
+	color: green;
+}
+
+.task .taskLabel.DONE {
+	text-decoration: line-through;
+	color: #BBB;
+}

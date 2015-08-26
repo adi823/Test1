@@ -39,23 +39,29 @@
     <div class = "row">
       <div class = "list col col-md-offset-4 col-md-4"></div>
     </div>
-  </div>
 
-  <!-- Invisible template -->
-  <div class = "template">
-    <div class = "task input-group">
-      <span class = "btnStatusTask input-group-addon">
-        <span class = "glyphicon glyphicon-tasks"></span>
-      </span>
-      <span class = "taskLabel form-control"></span>
-      <span class = "btnDeleteTask input-group-addon">
-        <span class = "glyphicon glyphicon-minus"></span>
-      </span>
+    <div class="hidden">
+      <br>
+      <pre class="debug"></pre>
     </div>
   </div>
 
 
-     
+  <!-- Templates -->
+  <script id="todo-template" type="text/x-handlebars-template">
+    <div class = "task input-group">
+      <span class = "btnStatusTask input-group-addon {{state}}">
+        <span class = "glyphicon {{icon}}"></span>
+      </span>
+      <span class = "taskLabel form-control {{state}}">{{title}}</span>
+      <span class = "btnDeleteTask input-group-addon">
+        <span class = "glyphicon glyphicon-minus"></span>
+      </span>
+    </div>
+  </script>
+
+
+
   <!-- JS libraries -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
