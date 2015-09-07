@@ -47,26 +47,12 @@
   </div>
 
 
-  <!-- Templates -->
-  <script id="todo-template" type="text/x-handlebars-template">
-    <div class = "task input-group">
-      <span class = "btnStatusTask input-group-addon {{state}}">
-        <span class = "glyphicon {{icon}}"></span>
-      </span>
-      <span class = "taskLabel form-control {{state}}">{{title}}</span>
-      <span class = "btnDeleteTask input-group-addon">
-        <span class = "glyphicon glyphicon-minus"></span>
-      </span>
-    </div>
-  </script>
-
-
-
   <!-- JS libraries -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-  <script src="bower_components/handlebars/handlebars.js"></script>
+  <script src="bower_components/handlebars/handlebars.runtime.js"></script>
   <!-- custom JS -->
+  <script src="templates/templates.js"></script>
   <script src="js/todo.js"></script>
   <script src="js/app.js"></script>
 </body>

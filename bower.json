@@ -15,5 +15,8 @@
     "jquery": ">=2.0.3",
     "bootstrap": "~3.3.5",
     "handlebars": "~3.0.3"
+  },
+  "resolutions": {
+    "handlebars": "~3.0.3"
   }
 }

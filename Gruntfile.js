@@ -6,8 +6,21 @@ module.exports = function (grunt) {
   // Load Grunt tasks declared in the package.json file
   require('load-grunt-tasks')(grunt);
 
-  // Configure Grunt 
+  // Configure Grunt
   grunt.initConfig({
+
+    handlebars: {
+      compile: {
+        options: {
+          namespace: "AppTemplates",
+          wrapped: true,
+          node: true
+        },
+        files: {
+          "templates/templates.js": "templates/*.hbs"
+        }
+      }
+    },
 
     // grunt-express serves the files from the folders listed in `bases`
     // on specified `port` and `hostname`
@@ -25,7 +38,7 @@ module.exports = function (grunt) {
     // grunt-watch monitors the projects files
     watch: {
       all: {
-        
+
         files: ['index.html', 'css/**/*.css', 'js/**/*.js'],
         options: {
           livereload: true
@@ -44,6 +57,7 @@ module.exports = function (grunt) {
 
   // Creates the `server` task
   grunt.registerTask('server', [
+    'handlebars',
     'express',
     'open',
     'watch'

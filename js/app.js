@@ -42,35 +42,20 @@ var renderTask = function(todo) {
         return;
     }
 
-		var source = $('#todo-template').html();
-		var template = Handlebars.compile(source);
+		//var source = $('#todo-template').html();
+
+		//var template = Handlebars.compile(source);
+		var template = AppTemplates["templates/todos.hbs"];
 		context = {
 			title: todo.title,
 			state: todo.state,
 			icon: (todo.state=='TODO') ? 'glyphicon-tasks' : 'glyphicon-ok'
 		};
+
 		var taskElement = $(template(context));
 		taskElement.find(".btnDeleteTask").click(deleteTask);
     taskElement.find(".btnStatusTask").click(toggleTaskStatus);
 
-		/*
-    taskElement.find(".taskLabel").text(taskLabelText);
-
-		if(todo.state != "TODO"){
-        taskElement.find(".taskLabel").css("text-decoration", "line-through");
-        taskElement.find(".btnStatusTask .glyphicon")
-               .removeClass("glyphicon-tasks")
-               .addClass("glyphicon-ok")
-               .css("color", "green");
-    } else {
-        taskElement.find(".taskLabel").css("text-decoration", "none");
-        taskElement.find(".btnStatusTask .glyphicon")
-               .removeClass("glyphicon-ok")
-               .addClass("glyphicon-tasks")
-               .css("color", "#555");
-
-    }
-		*/
 
     //console.debug("insert task %s, from element %o", taskLabelText, taskElement);
     $(".list").append($(taskElement));
